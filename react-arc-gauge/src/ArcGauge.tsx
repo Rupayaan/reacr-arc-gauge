@@ -195,11 +195,13 @@ export const ArcGauge: React.FC<ArcGaugeProps & { theme?: ThemeKey }> = ({
               />
               {markerDisplay === "value" && (
                 <text
-                  x={center + (r + 18) * Math.cos(rad)}
-                  y={center + (r + 18) * Math.sin(rad) + 5}
+                  x={center + (r + 18) * Math.cos(rad)+7}
+                  y={center + (r + 18) * Math.sin(rad)-2}
                   textAnchor="middle"
+                  dominantBaseline="middle"
                   fontSize="13"
                   fill="#888"
+                  transform={`rotate(270, ${center + (r + 18) * Math.cos(rad)}, ${center + (r + 18) * Math.sin(rad)})`}
                 >
                   {valueAtMarker}
                 </text>
@@ -212,24 +214,15 @@ export const ArcGauge: React.FC<ArcGaugeProps & { theme?: ThemeKey }> = ({
       {showLabel && (
         <text
           x={center}
-          y={center + 10}
+          y={250}
           textAnchor="middle"
-          fontSize="32"
-          fill={t.labelColor ?? "#333"}
+          dominantBaseline="middle"
+          fontSize={size * 0.12}
+          fill="#222"
+          fontWeight="bold"
+          style={{ textShadow: "0 2px 8px #fff" }}
         >
-          {typeof label === "function"
-            ? (() => {
-                const result = label(value);
-                if (result instanceof Promise) {
-                  // If label function returns a Promise, fallback to value (or handle as needed)
-                  console.warn("ArcGauge label function should not return a Promise.");
-                  return `${value}`;
-                }
-                return React.isValidElement(result) || typeof result === "string" || typeof result === "number"
-                  ? result
-                  : `${value}`;
-              })()
-            : label ?? `${value}`}
+          {typeof label === "function" ? label(value) : label ?? value}
         </text>
       )}
     </svg>

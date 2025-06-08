@@ -1,54 +1,84 @@
-# React + TypeScript + Vite
+# React Arc Gauge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A highly customizable, animated arc gauge component for React.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Customizable arc angle, thickness, and size
+- Supports both "fill" and "segments" gauge types
+- Custom pointer styles and themes
+- Optional markers and value labels
+- Smooth animations
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Usage
+
+```tsx
+import { ArcGauge } from "react-arc-gauge";
+
+// Fully customized example
+<ArcGauge
+  value={75}
+  maxValue={120}
+  size={350}
+  arcAngle={240}
+  thickness={30}
+  gaugeType="segments"
+  segments={[
+    { length: 30, color: "#f44336" },
+    { length: 30, color: "#ffeb3b" },
+    { length: 60, color: "#4caf50" }
+  ]}
+  showMarkers={true}
+  markerDisplay="value"
+  showNeedle={true}
+  pointerType="short"
+  showLabel={true}
+  label={v => `${v} units`}
+  animationStyle="slideUp"
+  animationDuration={1000}
+/>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Basic usage:** Just set `value` and `maxValue`.
+- **Fully customized:** Control size, arc, thickness, segments, markers, pointer, label, and animation.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Customization
+
+- **Theming:** Use the `theme` prop or override colors directly.
+- **Pointers:** Use built-in pointer styles or pass your own React component as a custom pointer via the `customPointer` prop.  
+  _To use an SVG file, convert it to a React component (e.g., with [SVGR](https://react-svgr.com/)) and pass it as `customPointer`._
+- **Animations:** Choose from built-in animation styles.
+
+---
+
+## Live Demo
+
+👉 [Try the Arc Gauge Demo](https://rupayaan.github.io/reacr-arc-gauge/)
+
+---
+
+## Updates & Roadmap
+
+- **Upcoming:**
+  - Built-in SVG-to-pointer converter (use SVG files directly as needles)
+  - More built-in themes and pointer shapes
+  - Accessibility improvements
+  - Export as PNG/SVG
+  - Improved mobile support
+
+- **Feature requests and bug reports:**  
+  [Open an issue](https://github.com/Rupayaan/reacr-arc-gauge/issues) or submit a pull request!
+
+---
+
+## Keywords
+
+`react` `gauge` `arc` `component` `visualization` `dashboard` `meter` `svg` `animated` `customizable`
+
+---

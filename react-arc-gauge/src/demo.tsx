@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { ArcGauge } from "./ArcGauge";
 import { ArcGaugeThemes } from "./styles/themes";
 import { ArcGaugeAnimations } from "./styles/animations";
 import { PointerThemes } from "./styles/pointerThemes";
+import "./demo.css";
 
 // Example custom pointer
 const CustomPointer = ({ angle, center, radius, color }: any) => {
@@ -81,179 +83,180 @@ const Demo: React.FC = () => {
   const clampedValue = Math.max(0, Math.min(value, maxValue));
 
   return (
-    <div style={{ padding: 40, textAlign: "center", fontFamily: "sans-serif" }}>
-      <h2>Arc Gauge Playground</h2>
-
-      <div style={{ marginBottom: 16 }}>
-        <label>
-          <b>Gauge Type:</b>{" "}
-          <select
-            value={gaugeType}
-            onChange={e => setGaugeType(e.target.value as any)}
-          >
-            <option value="fill">Fill</option>
-            <option value="segments">Segments</option>
-          </select>
-        </label>
-        {"  "}
-        <label style={{ marginLeft: 16 }}>
-          <b>Pointer:</b>{" "}
-          <select
-            value={pointerType}
-            onChange={e => setPointerType(e.target.value as any)}
-          >
-            {pointerTypes.map(pt => (
-              <option key={pt.value} value={pt.value}>{pt.label}</option>
-            ))}
-          </select>
-        </label>
-        {"  "}
-        <label style={{ marginLeft: 16 }}>
-          <input
-            type="checkbox"
-            checked={showNeedle}
-            onChange={e => setShowNeedle(e.target.checked)}
-          /> Show Needle
-        </label>
-        {"  "}
-        <label style={{ marginLeft: 16 }}>
-          <input
-            type="checkbox"
-            checked={showMarkers}
-            onChange={e => setShowMarkers(e.target.checked)}
-          /> Show Markers
-        </label>
-        {"  "}
-        <label style={{ marginLeft: 16 }}>
-          <input
-            type="checkbox"
-            checked={showLabel}
-            onChange={e => setShowLabel(e.target.checked)}
-          /> Show Label
-        </label>
+    <div className="demo-bg">
+      <h1 className="demo-title">React Arc Gauge Playground</h1>
+      <div className="demo-desc">
+        Beautiful, animated, and fully customizable arc gauge for React.
       </div>
-
-      {gaugeType === "segments" && (
-        <div style={{ margin: "16px 0", border: "1px solid #eee", padding: 12, borderRadius: 8 }}>
-          <b>Segments:</b>
-          {segments.map((seg, i) => (
-            <div key={i} style={{ margin: 4, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <label>
-                Length:{" "}
-                <input
-                  type="number"
-                  min={0}
-                  max={maxValue}
-                  value={seg.length}
-                  onChange={e => handleSegmentChange(i, "length", e.target.value)}
-                  style={{ width: 60 }}
-                />
-              </label>
-              <label style={{ marginLeft: 8 }}>
-                Color:{" "}
-                <input
-                  type="color"
-                  value={seg.color}
-                  onChange={e => handleSegmentChange(i, "color", e.target.value)}
-                />
-              </label>
-              <button style={{ marginLeft: 8 }} onClick={() => removeSegment(i)} disabled={segments.length <= 1}>Remove</button>
-            </div>
-          ))}
-          <button style={{ marginTop: 8 }} onClick={addSegment}>Add Segment</button>
-          <div style={{ fontSize: 12, color: "#888", marginTop: 4 }}>
-            Total: {segments.reduce((a, b) => a + Number(b.length), 0)} / {maxValue}
-            {segments.reduce((a, b) => a + Number(b.length), 0) !== maxValue && (
-              <span style={{ color: "red", marginLeft: 8 }}>Segments must sum to maxValue!</span>
-            )}
-          </div>
+      <div className="demo-panel">
+        <div className="demo-controls" style={{ marginBottom: 16 }}>
+          <label>
+            <b>Gauge Type:</b>
+            <select
+              value={gaugeType}
+              onChange={e => setGaugeType(e.target.value as any)}
+            >
+              <option value="fill">Fill</option>
+              <option value="segments">Segments</option>
+            </select>
+          </label>
+          <label>
+            <b>Pointer:</b>
+            <select
+              value={pointerType}
+              onChange={e => setPointerType(e.target.value as any)}
+            >
+              {pointerTypes.map(pt => (
+                <option key={pt.value} value={pt.value}>{pt.label}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={showNeedle}
+              onChange={e => setShowNeedle(e.target.checked)}
+            /> Show Needle
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={showMarkers}
+              onChange={e => setShowMarkers(e.target.checked)}
+            /> Show Markers
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={showLabel}
+              onChange={e => setShowLabel(e.target.checked)}
+            /> Show Label
+          </label>
         </div>
-      )}
 
-      <ArcGauge
-        value={clampedValue}
-        maxValue={maxValue}
-        size={300}
-        arcAngle={270}
-        thickness={25}
-        theme={customTheme && Object.keys(customTheme).length ? customTheme : theme}
-        animationStyle={customAnim && Object.keys(customAnim).length ? customAnim : animation}
-        animationDuration={800}
-        showNeedle={showNeedle}
-        showLabel={showLabel}
-        rotation={90}
-        label={v => `${v} units`}
-        gaugeType={gaugeType}
-        segments={gaugeType === "segments" ? segments : []}
-        showMarkers={showMarkers}
-        pointerType={pointerType === "custom" ? undefined : pointerType}
-        customPointer={pointerComp}
-      />
+        {gaugeType === "segments" && (
+          <div className="demo-segments">
+            <b>Segments:</b>
+            {segments.map((seg, i) => (
+              <div key={i} style={{ margin: 4, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <label>
+                  Length:
+                  <input
+                    type="number"
+                    min={0}
+                    max={maxValue}
+                    value={seg.length}
+                    onChange={e => handleSegmentChange(i, "length", e.target.value)}
+                    style={{ width: 60 }}
+                  />
+                </label>
+                <label>
+                  Color:
+                  <input
+                    type="color"
+                    value={seg.color}
+                    onChange={e => handleSegmentChange(i, "color", e.target.value)}
+                  />
+                </label>
+                <button onClick={() => removeSegment(i)} disabled={segments.length <= 1}>Remove</button>
+              </div>
+            ))}
+            <button style={{ marginTop: 8, background: "#2196f3" }} onClick={addSegment}>Add Segment</button>
+            <div style={{ fontSize: 12, color: "#888", marginTop: 4 }}>
+              Total: {segments.reduce((a, b) => a + Number(b.length), 0)} / {maxValue}
+              {segments.reduce((a, b) => a + Number(b.length), 0) !== maxValue && (
+                <span style={{ color: "red", marginLeft: 8 }}>Segments must sum to maxValue!</span>
+              )}
+            </div>
+          </div>
+        )}
 
-      <div style={{ marginTop: 20 }}>
-        <input
-          type="range"
+        <ArcGauge
           value={clampedValue}
-          onChange={e => setValue(+e.target.value)}
-          min={0}
-          max={maxValue}
-          style={{ width: 300 }}
+          maxValue={maxValue}
+          size={340}
+          arcAngle={270}
+          thickness={32}
+          theme={customTheme && Object.keys(customTheme).length ? customTheme : theme}
+          animationStyle={customAnim && Object.keys(customAnim).length ? customAnim : animation}
+          animationDuration={900}
+          showNeedle={showNeedle}
+          showLabel={showLabel}
+          rotation={90}
+          label={v => `${v} units`}
+          gaugeType={gaugeType}
+          segments={gaugeType === "segments" ? segments : []}
+          showMarkers={showMarkers}
+          pointerType={pointerType === "custom" ? undefined : pointerType}
+          customPointer={pointerComp}
         />
-        <div>Value: {clampedValue}</div>
-      </div>
 
-      <div style={{ marginTop: 20 }}>
-        <label>
-          <b>Theme:</b>{" "}
-          <select value={themeIndex} onChange={e => setThemeIndex(Number(e.target.value))}>
-            {themeKeys.map((t, i) => (
-              <option key={t} value={i}>{t}</option>
-            ))}
-          </select>
-        </label>
-        {"  "}
-        <label style={{ marginLeft: 16 }}>
-          <b>Animation:</b>{" "}
-          <select value={animIndex} onChange={e => setAnimIndex(Number(e.target.value))}>
-            {animationKeys.map((a, i) => (
-              <option key={a} value={i}>{a}</option>
-            ))}
-          </select>
-        </label>
-      </div>
-
-      <div style={{ marginTop: 20 }}>
-        <label>
-          <b>Max Value:</b>{" "}
+        <div className="demo-slider">
           <input
-            type="number"
-            min={1}
-            value={maxValue}
-            onChange={e => {
-              const newMax = Math.max(1, Number(e.target.value));
-              setMaxValue(newMax);
-              // Adjust segments if needed
-              if (gaugeType === "segments") {
-                setSegments(segs => {
-                  const total = segs.reduce((a, b) => a + Number(b.length), 0);
-                  if (total > newMax) {
-                    // Scale down
-                    return segs.map(s => ({ ...s, length: Math.round((s.length / total) * newMax) }));
-                  }
-                  return segs;
-                });
-              }
-              if (value > newMax) setValue(newMax);
-            }}
-            style={{ width: 80 }}
+            type="range"
+            value={clampedValue}
+            onChange={e => setValue(+e.target.value)}
+            min={0}
+            max={maxValue}
           />
-        </label>
-      </div>
+          <div>Value: {clampedValue}</div>
+        </div>
 
-      <div style={{ marginTop: 20, fontSize: 14 }}>
+        <div style={{ marginTop: 20 }}>
+          <label>
+            <b>Theme:</b>
+            <select value={themeIndex} onChange={e => setThemeIndex(Number(e.target.value))}>
+              {themeKeys.map((t, i) => (
+                <option key={t} value={i}>{t}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <b>Animation:</b>
+            <select value={animIndex} onChange={e => setAnimIndex(Number(e.target.value))}>
+              {animationKeys.map((a, i) => (
+                <option key={a} value={i}>{a}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        <div style={{ marginTop: 20 }}>
+          <label>
+            <b>Max Value:</b>
+            <input
+              type="number"
+              min={1}
+              value={maxValue}
+              onChange={e => {
+                const newMax = Math.max(1, Number(e.target.value));
+                setMaxValue(newMax);
+                if (gaugeType === "segments") {
+                  setSegments(segs => {
+                    const total = segs.reduce((a, b) => a + Number(b.length), 0);
+                    if (total > newMax) {
+                      return segs.map(s => ({ ...s, length: Math.round((s.length / total) * newMax) }));
+                    }
+                    return segs;
+                  });
+                }
+                if (value > newMax) setValue(newMax);
+              }}
+              style={{ width: 80 }}
+            />
+          </label>
+        </div>
+      </div>
+      <div className="demo-footer">
         <strong>Theme:</strong> {typeof theme === "string" ? theme : "custom"} |{" "}
         <strong>Animation:</strong> {typeof animation === "string" ? animation : "custom"} |{" "}
         <strong>Pointer:</strong> {pointerType}
+        <br />
+        <span>
+          <a href="https://github.com/Rupayaan/reacr-arc-gauge" target="_blank" rel="noopener noreferrer">
+            View source &amp; live demo on GitHub
+          </a>
+        </span>
       </div>
     </div>
   );

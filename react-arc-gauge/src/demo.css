@@ -1,0 +1,108 @@
+.demo-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px;
+}
+
+.demo-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.demo-desc {
+  color: #666;
+  font-size: 1.15rem;
+  margin-bottom: 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.demo-panel {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.07);
+  padding: 32px 32px 24px 32px;
+  margin-bottom: 32px;
+  min-width: 380px;
+  max-width: 95vw;
+}
+
+.demo-controls label {
+  margin-right: 18px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.demo-controls select,
+.demo-controls input[type="number"],
+.demo-controls input[type="range"] {
+  margin-left: 6px;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  padding: 3px 8px;
+  font-size: 1rem;
+}
+
+.demo-controls input[type="checkbox"] {
+  margin-left: 8px;
+}
+
+.demo-segments {
+  margin: 18px 0 0 0;
+  padding: 12px;
+  border-radius: 10px;
+  background: #f6f8fa;
+  border: 1px solid #e0e7ef;
+}
+
+.demo-segments label {
+  margin-right: 10px;
+}
+
+.demo-segments button {
+  margin-left: 8px;
+  border: none;
+  background: #f44336;
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.demo-segments button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.demo-slider {
+  margin-top: 24px;
+  width: 320px;
+}
+
+.demo-slider input[type="range"] {
+  width: 100%;
+}
+
+.demo-footer {
+  margin-top: 32px;
+  color: #888;
+  font-family: monospace;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.demo-label {
+  font-size: 2.5rem;
+  color: #222;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 0 2px 8px #fff;
+}
