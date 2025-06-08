@@ -1,0 +1,15 @@
+/* src/arcGauge.css */
+.arc-gauge path {
+  transition: stroke-dashoffset 0.5s ease-in-out;
+}
+.arc-fade-in path {
+  animation: fadeIn 0.8s ease forwards;
+}
+@keyframes fadeIn {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
